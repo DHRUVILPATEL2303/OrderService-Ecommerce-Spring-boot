@@ -6,5 +6,6 @@ import com.example.OrderService_Ecommerce_Spring_boot.dto.UpdateOrderResponseDTO
 
 public interface IOrderService {
     CreateOrderResponseDTO createOrder(OrderRequestDTO orderRequestDTO);
-    UpdateOrderResponseDTO updateOrder(Long id);
+    UpdateOrderResponseDTO updateOrderStatusToSuccess(Long id);
+    UpdateOrderResponseDTO updateOrderStatusToCancel(Long id);
 }

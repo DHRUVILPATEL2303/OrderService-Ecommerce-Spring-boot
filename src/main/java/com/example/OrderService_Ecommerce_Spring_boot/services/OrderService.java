@@ -49,12 +49,20 @@ public class OrderService implements IOrderService{
     }
 
     @Override
-    public UpdateOrderResponseDTO updateOrder(Long id) {
+    public UpdateOrderResponseDTO updateOrderStatusToSuccess(Long id) {
         Order order = orderRepositry.findById(id).orElseThrow(() -> new OrderNotFoundException("Order Not Found!! Check Order ID"));
         order.setStatus(OrderStatus.COMPLETED);
 
         orderRepositry.save(order);
-        return OrderMapper.toUpdateOrderResponseDTO(order);
+        return OrderMapper.toUpdateOrderToSucccessResponseDTO(order);
 
+    }
+
+    @Override
+    public UpdateOrderResponseDTO updateOrderStatusToCancel(Long id) {
+        Order order = orderRepositry.findById(id).orElseThrow(() -> new OrderNotFoundException("Order Not Found!! Check OrderId"));
+        order.setStatus(OrderStatus.CANCELLED);
+        orderRepositry.save(order);
+        return OrderMapper.toUpdateOrderToCancelResponseDTO(order);
     }
 }

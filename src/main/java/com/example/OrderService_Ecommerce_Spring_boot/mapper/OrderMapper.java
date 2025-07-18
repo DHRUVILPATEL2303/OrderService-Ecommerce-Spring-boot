@@ -23,10 +23,18 @@ public class OrderMapper {
                 .build();
     }
 
-    public static UpdateOrderResponseDTO toUpdateOrderResponseDTO(Order order){
+    public static UpdateOrderResponseDTO toUpdateOrderToSucccessResponseDTO(Order order){
         return UpdateOrderResponseDTO.builder()
                 .orderId(order.getId())
                 .status(OrderStatus.COMPLETED)
+                .build();
+    }
+
+
+    public static UpdateOrderResponseDTO toUpdateOrderToCancelResponseDTO(Order order){
+        return UpdateOrderResponseDTO.builder()
+                .orderId(order.getId())
+                .status(OrderStatus.CANCELLED)
                 .build();
     }
 }

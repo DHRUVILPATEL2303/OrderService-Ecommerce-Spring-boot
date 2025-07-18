@@ -28,11 +28,19 @@ public class OrderController {
         return ResponseEntity.ok(createOrderResponseDTO);
     }
 
-    @PatchMapping("/update/{id}")
-    public ResponseEntity<UpdateOrderResponseDTO> updateOrder(@PathVariable("id") Long orderId){
-        UpdateOrderResponseDTO updateOrderResponseDTO=orderService.updateOrder(orderId);
+    @PatchMapping("/update/success/{id}")
+    public ResponseEntity<UpdateOrderResponseDTO> updateOrderStatusToSuccess(@PathVariable("id") Long orderId){
+        UpdateOrderResponseDTO updateOrderResponseDTO=orderService.updateOrderStatusToSuccess(orderId);
         return ResponseEntity.ok(updateOrderResponseDTO);
     }
+
+
+    @PatchMapping("/update/cancel/{id}")
+    public ResponseEntity<UpdateOrderResponseDTO> updateOrderStatusToCancel(@PathVariable("id") Long orderId){
+       UpdateOrderResponseDTO updateOrderResponseDTO=orderService.updateOrderStatusToCancel(orderId);
+       return ResponseEntity.ok(updateOrderResponseDTO);
+    }
+
 
 
 //    @ExceptionHandler(OrderNotFoundException.class)
