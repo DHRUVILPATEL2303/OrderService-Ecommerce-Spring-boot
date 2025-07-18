@@ -1,12 +1,11 @@
 package com.example.OrderService_Ecommerce_Spring_boot.services;
 
 import com.example.OrderService_Ecommerce_Spring_boot.clients.ProductServiceClient;
-import com.example.OrderService_Ecommerce_Spring_boot.dto.CreateOrderResponseDTO;
-import com.example.OrderService_Ecommerce_Spring_boot.dto.OrderItemDTO;
-import com.example.OrderService_Ecommerce_Spring_boot.dto.OrderRequestDTO;
-import com.example.OrderService_Ecommerce_Spring_boot.dto.ProductDTO;
+import com.example.OrderService_Ecommerce_Spring_boot.dto.*;
 import com.example.OrderService_Ecommerce_Spring_boot.entity.Order;
 import com.example.OrderService_Ecommerce_Spring_boot.entity.OrderItem;
+import com.example.OrderService_Ecommerce_Spring_boot.enums.OrderStatus;
+import com.example.OrderService_Ecommerce_Spring_boot.exception.OrderNotFoundException;
 import com.example.OrderService_Ecommerce_Spring_boot.mapper.OrderItemMapper;
 import com.example.OrderService_Ecommerce_Spring_boot.mapper.OrderMapper;
 import com.example.OrderService_Ecommerce_Spring_boot.repositry.OrderRepositry;
@@ -46,6 +45,16 @@ public class OrderService implements IOrderService{
         Order createdorder =orderRepositry.save(order);
 
         return OrderMapper.toCreateOrderResponseDTO(createdorder);
+
+    }
+
+    @Override
+    public UpdateOrderResponseDTO updateOrder(Long id) {
+        Order order = orderRepositry.findById(id).orElseThrow(() -> new OrderNotFoundException("Order Not Found!! Check Order ID"));
+        order.setStatus(OrderStatus.COMPLETED);
+
+        orderRepositry.save(order);
+        return OrderMapper.toUpdateOrderResponseDTO(order);
 
     }
 }
