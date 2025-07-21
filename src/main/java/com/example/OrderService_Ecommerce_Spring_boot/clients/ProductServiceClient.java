@@ -9,17 +9,17 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class ProductServiceClient {
 
-    private final RestTemplateBuilder restTemplateBuilder;
+    private final RestTemplate restTemplate;
 
-
-    public ProductServiceClient(RestTemplateBuilder restTemplateBuilder) {
-        this.restTemplateBuilder = restTemplateBuilder;
+    public ProductServiceClient(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
     }
 
-    public ProductDTO getProductById(Long productId){
-        RestTemplate restTemplate = restTemplateBuilder.build();
 
-        String url = "http://localhost:3000/products/db/" + productId;
+    public ProductDTO getProductById(Long productId){
+
+
+        String url = "http://ECOMMERSPRING/products/db/" + productId;
         ResponseEntity<ProductDTO> response=restTemplate.getForEntity(url,ProductDTO.class);
         return response.getBody();
     }
