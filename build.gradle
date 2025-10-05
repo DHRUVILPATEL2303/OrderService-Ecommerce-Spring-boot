@@ -41,6 +41,7 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	implementation 'io.github.cdimascio:dotenv-java:3.2.0'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    implementation 'org.springframework.kafka:spring-kafka:3.0.0'
 
 
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:4.3.0'
